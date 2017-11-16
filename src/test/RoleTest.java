@@ -34,9 +34,20 @@ public class RoleTest {
 
     @Test
     public void testQuery() {
-        SqlSession sqlSession = SqlSessionFactoryUtil.openSqlSession();
-        RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
-        Role role = mapper.getRole(1L);
-        System.out.println(role.getRoleName() + role.getNote());
+        SqlSession sqlSession = null;
+        try {
+            sqlSession = SqlSessionFactoryUtil.openSqlSession();
+            RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
+            Role role = mapper.getRole(1L);
+            System.out.println(role);
+            sqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            sqlSession.rollback();
+        } finally {
+            if (sqlSession != null) {
+                sqlSession.close();
+            }
+        }
     }
 }

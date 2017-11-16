@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+
+    <properties resource="db.properties"/>
 
     <!--设置选项-->
     <settings>
@@ -18,12 +21,10 @@
         <setting name="useGeneratedKeys" value="true"/>
     </settings>
 
-    <!--别名配置-->
     <typeAliases>
         <typeAlias type="com.ascland.chapter02.Role" alias="role"/>
     </typeAliases>
 
-    <!--环境配置-->
     <environments default="dev">
         <environment id="dev">
             <transactionManager type="JDBC">
@@ -31,15 +32,14 @@
             </transactionManager>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="url" value="${data_source_url}"/>
+                <property name="username" value="${data_source_username}"/>
+                <property name="password" value="${data_source_password}"/>
             </dataSource>
         </environment>
     </environments>
 
     <mappers>
-
-        <mapper resource="com/ascland/chapter02/roleMapper.xml"/>
+        <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
     </mappers>
 </configuration>
