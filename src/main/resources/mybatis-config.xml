@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!--设置选项-->
+    <settings>
+        <!-- 开启mybatis缓存设置,一般都是true -->
+        <setting name="cacheEnabled" value="true"/>
+        <!--延迟加载的全局开关-->
+        <setting name="lazyLoadingEnabled" value="false"/>
+        <!--设置超时时间-->
+        <setting name="defaultStatementTimeout" value="3000"/>
+        <!--本地缓存机制-->
+        <setting name="localCacheScope" value="STATEMENT"/>
+        <setting name="defaultExecutorType" value="SIMPLE"/>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--允许JDBC支持自动生成主键,需要驱动的兼容-->
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+
+    <!--别名配置-->
+    <typeAliases>
+        <typeAlias type="com.ascland.chapter02.Role" alias="role"/>
+    </typeAliases>
+
+    <!--环境配置-->
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC">
+                <property name="autoCommit" value="false"/>
+            </transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+
+        <!--<mapper resource="com\ascland\chapter02\roleMapper.xml"/>-->
+        <mapper resource="com/ascland/chapter02/roleMapper.xml"/>
+    </mappers>
+</configuration>
