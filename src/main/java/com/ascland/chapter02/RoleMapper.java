@@ -5,7 +5,7 @@ package com.ascland.chapter02;
  */
 public interface RoleMapper {
 
-    Role getRole();
+    Role getRole(long id);
 
     void insertRole(Role role);
 

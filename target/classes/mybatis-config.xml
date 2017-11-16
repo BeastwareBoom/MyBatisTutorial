@@ -40,6 +40,7 @@
 
     <mappers>
 
-        <mapper resource="com/ascland/chapter02/roleMapper.xml"/>
+        <mapper resource="com\ascland\chapter02\roleMapper.xml"/>
+        <!--<mapper resource="com/ascland/chapter02/roleMapper.xml"/>-->
     </mappers>
 </configuration>
