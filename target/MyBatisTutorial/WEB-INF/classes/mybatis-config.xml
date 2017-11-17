@@ -41,6 +41,5 @@
 
     <mappers>
         <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
-        <!--<package name="com.ascland.chapter02"/>-->
     </mappers>
 </configuration>

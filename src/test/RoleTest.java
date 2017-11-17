@@ -38,6 +38,7 @@ public class RoleTest {
         try {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
+            System.out.println(mapper);
             Role role = mapper.getRole(1L);
             System.out.println(role);
             sqlSession.commit();

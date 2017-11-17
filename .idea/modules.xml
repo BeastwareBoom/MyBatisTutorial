@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/MyBatisTutorial.iml" filepath="$PROJECT_DIR$/MyBatisTutorial.iml" />
-      <module fileurl="file://F:/IntellijIDEA/MyBatis-Tutorial/SpringMVCTutorial.iml" filepath="F:/IntellijIDEA/MyBatis-Tutorial/SpringMVCTutorial.iml" />
+      <module fileurl="file://F:\IntellijIDEA\MyBatis-Tutorial\SpringMVCTutorial.iml" filepath="F:\IntellijIDEA\MyBatis-Tutorial\SpringMVCTutorial.iml" />
     </modules>
   </component>
 </project>

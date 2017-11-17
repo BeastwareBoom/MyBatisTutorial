@@ -38,15 +38,19 @@ public class SqlSessionFactoryUtil {
             Logger.getLogger(SqlSessionFactoryUtil.class.getName()).log(Level.SEVERE, null, e);
         }
 
-        synchronized (CLASS_LOCK) {
-            if (sqlSessionFactory == null) {
-                sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        //提高效率
+        if (sqlSessionFactory == null) {
+            synchronized (CLASS_LOCK) {
+                if (sqlSessionFactory == null) {
+                    sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+                }
             }
         }
     }
 
     /**
      * 获取SqlSession
+     *
      * @return
      */
     public static SqlSession openSqlSession() {

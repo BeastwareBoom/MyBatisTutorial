@@ -40,6 +40,16 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
+        <!--<mapper resource="com/ascland/chapter02/RoleMapper.xml"/>-->
+
+        <!--批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载
+        遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
+        上边规范的前提是：使用的是mapper代理方法; -->
+        <!--<package name="com.ascland.chapter02"/>-->
+
+        <!--通过mapper接口加载单个映射配置文件
+        遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
+        上边规范的前提是：使用的是mapper代理方法;-->
+        <!--<mapper class="com.ascland.chapter02.RoleMapper"/>-->
     </mappers>
 </configuration>

@@ -1,8 +1,4 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" pageEncoding="utf-8" %>
-<%@include file="/WEB-INF/jsp/common/tagPage.jsp" %>
-<%
-    response.sendRedirect(webRoot + "/book_input");
-%>
 <html>
 <body>
 <h2>Hello World!</h2>

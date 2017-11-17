@@ -6,11 +6,11 @@
       SELECT id,role_name AS roleName,note from t_role WHERE id = #{id}
     </select>
 
-    <select id="insertRole" parameterType="role">
+    <insert id="insertRole" parameterType="role">
         INSERT INTO t_tole(role_name,note)VALUES (#{roleName},#{note})
-    </select>
+    </insert>
 
-    <select id="deleteRole" parameterType="long">
+    <delete id="deleteRole" parameterType="long">
         DELETE FROM t_role WHERE id = #{id}
-    </select>
+    </delete>
 </mapper>

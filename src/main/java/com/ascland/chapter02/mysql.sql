@@ -9,4 +9,7 @@ CREATE TABLE t_role(id INT PRIMARY KEY AUTO_INCREMENT,role_name VARCHAR(20),note
 SELECT * FROM t_role;
 
 USE mybatis;
-SHOW  TABLES ;
+
+SHOW TABLES;
+
+INSERT INTO t_role(role_name, note) VALUES ("001","002");
