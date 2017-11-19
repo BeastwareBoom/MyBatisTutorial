@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="mybatis@localhost">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.4">
     <root id="1"/>
     <schema id="2" parent="1" name="mybatis">
       <Current>1</Current>
@@ -13,25 +13,59 @@
     <schema id="7" parent="1" name="org1010"/>
     <schema id="8" parent="1" name="performance_schema"/>
     <schema id="9" parent="1" name="ssm1024"/>
-    <table id="10" parent="2" name="t_role"/>
-    <column id="11" parent="10" name="id">
+    <schema id="10" parent="1" name="contacts_db"/>
+    <schema id="11" parent="1" name="hello_db"/>
+    <schema id="12" parent="1" name="hib_demo"/>
+    <schema id="13" parent="1" name="hotel"/>
+    <schema id="14" parent="1" name="test"/>
+    <table id="15" parent="2" name="t_role"/>
+    <table id="16" parent="2" name="t_user"/>
+    <column id="17" parent="15" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="12" parent="10" name="role_name">
+    <column id="18" parent="15" name="role_name">
       <Position>2</Position>
       <DataType>varchar(20)|0</DataType>
     </column>
-    <column id="13" parent="10" name="note">
+    <column id="19" parent="15" name="note">
       <Position>3</Position>
       <DataType>varchar(50)|0</DataType>
     </column>
-    <key id="14" parent="10" name="PRIMARY">
+    <key id="20" parent="15" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
+    <column id="21" parent="16" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="22" parent="16" name="user_name">
+      <Position>2</Position>
+      <DataType>varchar(20)|0</DataType>
+    </column>
+    <column id="23" parent="16" name="user_role_id">
+      <Position>3</Position>
+      <DataType>int(11)|0</DataType>
+    </column>
+    <index id="24" parent="16" name="FK_user_role">
+      <ColNames>user_role_id</ColNames>
+    </index>
+    <key id="25" parent="16" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="26" parent="16" name="FK_user_role">
+      <ColNames>user_role_id</ColNames>
+      <RefSchemaName>mybatis</RefSchemaName>
+      <RefTableName>t_role</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
   </database-model>
 </dataSource>

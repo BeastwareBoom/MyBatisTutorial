@@ -1,5 +1,9 @@
 package com.ascland.chapter02;
 
+import org.apache.ibatis.type.Alias;
+
+//包扫描定义别名
+@Alias("role")
 public class Role {
     private Long id;
     private String roleName;
