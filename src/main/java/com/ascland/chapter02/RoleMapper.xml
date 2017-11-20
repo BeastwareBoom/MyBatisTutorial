@@ -39,7 +39,7 @@
     
     <!--sql-->
     <sql id="someSQL">
-        ${tableName}.id,${tableName}.role_name
+         ${tableName}.id,${tableName}.role_name
     </sql>
 
     <select id="getAllRoles" >
