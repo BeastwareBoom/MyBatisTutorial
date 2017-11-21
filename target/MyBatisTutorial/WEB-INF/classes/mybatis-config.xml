@@ -19,10 +19,16 @@
         <setting name="mapUnderscoreToCamelCase" value="true"/>
         <!--允许JDBC支持自动生成主键,需要驱动的兼容-->
         <setting name="useGeneratedKeys" value="true"/>
+        <setting name="logImpl" value="log4j"/>
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.ascland.chapter02.Role" alias="role"/>
+        <!--使用全限定类名定义别名-->
+        <!--<typeAlias type="com.ascland.chapter02.Role" alias="role"/>-->
+
+        <!--当POJO比较多时，可以使用package包扫描形式配置，并添加类的注解@Alias("role")，
+        对于不添加注解的，MyBatis也会自动扫描生成别名，将类的首字母小写作为别名-->
+        <package name="com.ascland.chapter02"/>
     </typeAliases>
 
     <environments default="dev">
@@ -31,7 +37,7 @@
                 <property name="autoCommit" value="false"/>
             </transactionManager>
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="driver" value="${data_source_driverClass}"/>
                 <property name="url" value="${data_source_url}"/>
                 <property name="username" value="${data_source_username}"/>
                 <property name="password" value="${data_source_password}"/>
@@ -41,5 +47,16 @@
 
     <mappers>
         <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
+        <mapper resource="com/ascland/chapter02/UserMapper.xml"/>
+
+        <!--批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载
+        遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
+        上边规范的前提是：使用的是mapper代理方法; -->
+        <!--<package name="com.ascland.chapter02"/>-->
+
+        <!--通过mapper接口加载单个映射配置文件
+        遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
+        上边规范的前提是：使用的是mapper代理方法;-->
+        <!--<mapper class="com.ascland.chapter02.RoleMapper"/>-->
     </mappers>
 </configuration>

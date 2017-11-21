@@ -43,3 +43,5 @@ SELECT
 FROM t_user u
   LEFT JOIN t_role r ON u.user_role_id = r.id
 WHERE u.id = 1;
+
+# LEFT JOIN 与 LEFT OUTER JOIN 表示相同，写法不同

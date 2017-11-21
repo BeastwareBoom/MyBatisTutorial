@@ -4,40 +4,53 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
 <generatorConfiguration>
 
-    <!-- !!!! Driver Class Path !!!! -->
-    <classPathEntry location=""/>
+    <!--mybatis生成工具的帮助文档可以看：-->
+    <!--英文：http://www.mybatis.org/generator/usage/mysql.html-->
+    <!--中文：http://www.mybatis.tk/-->
+    <!--中文：http://mbg.cndocs.tk/-->
+
+
+    <!--添加你本地的驱动jar-->
+    <classPathEntry location="C:\maven\my_local_repository\mysql\mysql-connector-java\5.1.21\mysql-connector-java-5.1.21.jar"/>
 
     <context id="context" targetRuntime="MyBatis3">
+
+        <!--设置编码格式-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+
         <commentGenerator>
             <property name="suppressAllComments" value="false"/>
             <property name="suppressDate" value="true"/>
         </commentGenerator>
 
-        <!-- !!!! Database Configurations !!!! -->
-        <jdbcConnection driverClass="" connectionURL="" userId="" password=""/>
+        <!--添加你的 JDBC 连接信息-->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3306/mybatis" userId="root" password="root"/>
 
         <javaTypeResolver>
             <property name="forceBigDecimals" value="false"/>
         </javaTypeResolver>
 
-        <!-- !!!! Model Configurations !!!! -->
-        <javaModelGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <!--要生成的 pojo 模块位置-->
+        <javaModelGenerator targetPackage="com.ascland.org" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
 
-        <!-- !!!! Mapper XML Configurations !!!! -->
-        <sqlMapGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
+        <!--要生成的 Mapper.xml 文件位置-->
+        <sqlMapGenerator targetPackage="com.ascland.org" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED">
             <property name="enableSubPackages" value="false"/>
         </sqlMapGenerator>
 
-        <!-- !!!! Mapper Interface Configurations !!!! -->
-        <javaClientGenerator targetPackage="" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
+        <!--要生成的 Mapper 接口类-->
+        <javaClientGenerator targetPackage="com.ascland.org" targetProject="THIS_CONFIGURATION_IS_NOT_REQUIRED" type="XMLMAPPER">
             <property name="enableSubPackages" value="false"/>
         </javaClientGenerator>
 
-        <!-- !!!! Table Configurations !!!! -->
-        <table tableName="" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
-               enableUpdateByExample="false"/>
+
+        <!--要根据哪张表生成，要在这里配置-->
+        <!--用百分号表示生成所有表,可以直接省去一个一个写 <table tableName="%" /> -->
+        <table tableName="%" enableCountByExample="false" enableDeleteByExample="false" enableSelectByExample="false" enableUpdateByExample="false"/>
+
+
     </context>
 </generatorConfiguration>

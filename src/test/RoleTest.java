@@ -2,15 +2,26 @@ import com.ascland.chapter02.Role;
 import com.ascland.chapter02.RoleMapper;
 import com.ascland.chapter02.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.BasicConfigurator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Set;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Created by Asus on 2017/11/16.
  */
 public class RoleTest {
+
+
+    @BeforeClass
+    public static void init() {
+        //初始化log4j配置
+        BasicConfigurator.configure();
+    }
 
     @Test
     public void testInsertRole() {
@@ -22,7 +33,7 @@ public class RoleTest {
             role.setRoleName("管理员");
             role.setNote("说明");
             int column = mapper.insertRole(role);
-            System.out.println("column = "+column);
+            System.out.println("column = " + column);
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -47,7 +58,7 @@ public class RoleTest {
             role.setRoleName("管理员");
             role.setNote("说明insertRoleSelectKey");
             int column = mapper.insertRoleSelectKey(role);
-            System.out.println("column = "+column);
+            System.out.println("column = " + column);
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,7 +72,6 @@ public class RoleTest {
         }
 
     }
-
 
     @Test
     public void testGetRole() {
@@ -97,8 +107,8 @@ public class RoleTest {
             /*
             note = 说明,roleName = 管理员,id = 2
              */
-            for (Object key:keys){
-                System.out.println(key+" = "+map.get(key));
+            for (Object key : keys) {
+                System.out.println(key + " = " + map.get(key));
             }
             sqlSession.commit();
         } catch (Exception e) {
@@ -120,7 +130,7 @@ public class RoleTest {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             RoleMapper mapper = sqlSession.getMapper(RoleMapper.class);
             int roleCount = mapper.getRoleCount("管理");
-            System.out.println("roleCount = "+roleCount);
+            System.out.println("roleCount = " + roleCount);
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
