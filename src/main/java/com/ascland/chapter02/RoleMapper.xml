@@ -3,7 +3,7 @@
 <mapper namespace="com.ascland.chapter02.RoleMapper">
 
     <!--定义resultMap-->
-    <resultMap id="roleMap" type="com.ascland.chapter02.Role">
+    <resultMap id="roleMap" type="role">
         <id property="id" column="id"/>
         <result property="roleName" column="role_name"/>
         <result property="note" column="note"/>
