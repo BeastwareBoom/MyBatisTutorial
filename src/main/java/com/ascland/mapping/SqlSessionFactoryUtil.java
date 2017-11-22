@@ -1,4 +1,4 @@
-package com.ascland.chapter02;
+package com.ascland.mapping;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;

@@ -1,25 +1,25 @@
-package com.ascland.chapter02;
+package com.ascland.mapping;
 
 public class User {
-    private Long id;
+    private Long userId;
     private String userName;
     private Long userRoleId;
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
                 ", userName='" + userName + '\'' +
-                ", userRoleId='" + userRoleId + '\'' +
+                ", userRoleId=" + userRoleId +
                 '}';
     }
 
-    public Long getId() {
-        return id;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getUserName() {

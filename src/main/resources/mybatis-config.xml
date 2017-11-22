@@ -10,15 +10,18 @@
         <!-- 开启mybatis缓存设置,一般都是true -->
         <setting name="cacheEnabled" value="true"/>
         <!--延迟加载的全局开关-->
-        <setting name="lazyLoadingEnabled" value="false"/>
-        <!--<setting name="aggressiveLazyLoading" value="true"/>-->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <setting name="aggressiveLazyLoading" value="true"/>
 
         <!--设置超时时间-->
         <setting name="defaultStatementTimeout" value="3000"/>
         <!--本地缓存机制-->
         <setting name="localCacheScope" value="STATEMENT"/>
         <setting name="defaultExecutorType" value="SIMPLE"/>
+        <!--自动将下划线字段解析为驼峰命名的属性-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--自动映射，默认PARTIAL-->
+        <setting name="autoMappingBehavior" value="PARTIAL"/>
         <!--允许JDBC支持自动生成主键,需要驱动的兼容-->
         <setting name="useGeneratedKeys" value="true"/>
         <setting name="logImpl" value="LOG4J"/>
@@ -26,11 +29,11 @@
 
     <typeAliases>
         <!--使用全限定类名定义别名-->
-        <!--<typeAlias type="com.ascland.chapter02.Role" alias="role"/>-->
+        <!--<typeAlias type="com.ascland.mapping" alias="role"/>-->
 
         <!--当POJO比较多时，可以使用package包扫描形式配置，并添加类的注解@Alias("role")，
         对于不添加注解的，MyBatis也会自动扫描生成别名，将类的首字母小写作为别名-->
-        <package name="com.ascland.chapter02"/>
+        <package name="com.ascland.mapping"/>
         <package name="com.ascland.cascade.pojo"/>
     </typeAliases>
 
@@ -49,19 +52,19 @@
     </environments>
 
     <mappers>
-        <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
-        <mapper resource="com/ascland/chapter02/UserMapper.xml"/>
+        <mapper resource="com/ascland/mapping/RoleMapper.xml"/>
+        <mapper resource="com/ascland/mapping/UserMapper.xml"/>
         <mapper resource="com/ascland/cascade/mapper/CourseMapper.xml"/>
         <mapper resource="com/ascland/cascade/mapper/ClassMapper.xml"/>
 
         <!--批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载
         遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
         上边规范的前提是：使用的是mapper代理方法; -->
-        <!--<package name="com.ascland.chapter02"/>-->
+        <!--<package name="com.ascland.mapping>-->
 
         <!--通过mapper接口加载单个映射配置文件
         遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
         上边规范的前提是：使用的是mapper代理方法;-->
-        <!--<mapper class="com.ascland.chapter02.RoleMapper"/>-->
+        <!--<mapper class="com.ascland.mappingoleMapper"/>-->
     </mappers>
 </configuration>

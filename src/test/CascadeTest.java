@@ -2,7 +2,8 @@ import com.ascland.cascade.pojo.Class;
 import com.ascland.cascade.mapper.ClassMapper;
 import com.ascland.cascade.mapper.CourseMapper;
 import com.ascland.cascade.pojo.Course;
-import com.ascland.chapter02.SqlSessionFactoryUtil;
+import com.ascland.cascade.pojo.Student;
+import com.ascland.mapping.SqlSessionFactoryUtil;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.BeforeClass;
@@ -26,16 +27,21 @@ public class CascadeTest {
         try {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             CourseMapper mapper = sqlSession.getMapper(CourseMapper.class);
-//            ClassMapper studentMapper = sqlSession.getMapper(ClassMapper.class);
-//            Student studentMap = studentMapper.getStudentCourseMap(1);
-//            System.out.println(studentMap);
             Course course = new Course();
             course.setCourseId(1);
 //            course.setCourseName("数学");
+            //查询课程老师
 //            Course courseMap = mapper.getCourseMap(course);
-            Course courseStudentMap = mapper.getCourseStudentMap(1);
 //            System.out.println(courseMap);
-            System.out.println(courseStudentMap);
+
+            //查询课程+学生
+            Course courseStudentMap = mapper.getCourseStudentMap(1);
+//            System.out.println(courseStudentMap);
+//            List<Student> students = courseStudentMap.getStudents();
+//            for (int i = 0; i < students.size(); i++) {
+//                Student student = students.get(i);
+//                System.out.println(student);
+//            }
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,7 +62,7 @@ public class CascadeTest {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             ClassMapper mapper = sqlSession.getMapper(ClassMapper.class);
             Class classStudentMap = mapper.getClassStudentMap(1);
-//            Class classStudentMap = mapper.getClassMap(1);
+//            Class classStudentMap = mapper.getClassStudentMap2(1);
             System.out.println(classStudentMap);
             sqlSession.commit();
         } catch (Exception e) {

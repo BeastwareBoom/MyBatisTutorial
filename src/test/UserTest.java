@@ -1,6 +1,6 @@
-import com.ascland.chapter02.SqlSessionFactoryUtil;
-import com.ascland.chapter02.User;
-import com.ascland.chapter02.UserMapper;
+import com.ascland.mapping.SqlSessionFactoryUtil;
+import com.ascland.mapping.User;
+import com.ascland.mapping.UserMapper;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 

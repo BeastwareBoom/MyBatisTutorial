@@ -1,6 +1,4 @@
-package com.ascland.chapter02;
-
-import java.util.HashMap;
+package com.ascland.mapping;
 
 /**
  * Created by Asus on 2017/11/16.

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ascland.mapping.RoleMapper">
+
+
+    <!--resultType只能引用alias或com.ascland.mapping.Role-->
+    <!--<select id="getRole" parameterType="long" resultType="role">-->
+    <!--resultMap只能引用定义的resultMap-->
+    <select id="getRole" parameterType="long" resultType="role">
+        SELECT
+        <include refid="BaseColumns"/>
+        FROM t_role
+        WHERE role_id = #{roleId}
+    </select>
+
+    <!--统计指定role_name数量-->
+    <select id="getRoleCount" parameterType="string" resultType="int">
+        SELECT count(*) AS total
+        FROM t_role
+        WHERE role_name LIKE concat(#{role_name}, '%')
+    </select>
+
+    <!--sql标签定义所有列-->
+    <sql id="BaseColumns">
+        role_id, role_name, role_memo
+    </sql>
+
+    <sql id="AliasColumns">
+        #{prefix}.role_id, #{prefix}.role_name, #{prefix}.role_memo
+    </sql>
+
+    <select id="getAllRoles" resultType="role">
+        select
+        <include refid="AliasColumns">
+            <property name="prefix" value="R"/>
+        </include>
+        from t_role R;
+    </select>
+
+    <!--useGeneratedKeys启用主键回填，keyProperty指定哪个是主键字段对应的属性-->
+    <insert id="insertRole" parameterType="role" keyProperty="roleId" useGeneratedKeys="true">
+        INSERT INTO t_role (role_name, role_memo) VALUES (#{roleName,javaType=String,jdbcType=VARCHAR}, #{roleMemo})
+    </insert>
+
+    <!--定义规则生成主键-->
+    <insert id="insertRoleSelectKey" parameterType="role"
+            useGeneratedKeys="true">
+        <selectKey keyProperty="id" resultType="long" order="BEFORE">
+            SELECT if(max(role_id) IS NULL ,1,max(role_id)+10000) AS newId FROM t_role;
+        </selectKey>
+        INSERT INTO t_role (role_id,role_name, role_memo) VALUES (#{roleId},#{roleName}, #{roleMemo})
+    </insert>
+
+    <delete id="deleteRole" parameterType="long">
+        DELETE FROM t_role
+        WHERE role_id = #{roleId,javaType=Long,jdbcType=NUMERIC}
+    </delete>
+</mapper>

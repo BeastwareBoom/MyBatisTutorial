@@ -25,13 +25,13 @@
         </association>-->
 
         <!--【方式一】使用resultType关联  resultMap="teacherMap"-->
-        <association property="teacher" column="teacher_id" resultMap="teacherMap"/>
+        <association property="teacher" column="teacher_id"  resultMap="teacherMap"/>
     </resultMap>
 
     <resultMap id="courseStudentMap" type="course" extends="courseMap">
         <!--一对多关联学生-->
-        <collection property="students" javaType="list" ofType="student">
-            <id property="studentId" column="c_id"/>
+        <collection property="students" javaType="ArrayList" ofType="student" fetchType="lazy">
+            <id property="studentId" column="s_id"/>
             <result property="studentName" column="s_name"/>
             <result property="studentGender" column="s_gender"/>
             <result property="studentAge" column="s_age"/>
@@ -41,9 +41,9 @@
 
     <select id="getCourseMap" resultMap="courseMap" parameterType="course">
         SELECT
-        c.c_id AS courseId,
-        c.c_name AS courseName,
-        c.c_desc AS courseDesc,
+        c.c_id ,
+        c.c_name ,
+        c.c_desc ,
         t.t_id,
         t.t_name,
         t.t_gender,
@@ -63,24 +63,30 @@
     -->
     <select id="getCourseStudentMap" resultMap="courseStudentMap" parameterType="int">
         SELECT
-          c.c_id     AS courseId,
-          c.c_name   AS courseName,
-          c.c_desc   AS courseDesc,
+            c.c_id,
+            c.c_name,
+            c.c_desc,
 
-          t.t_id     ,
-          t.t_name   ,
-          t.t_gender ,
-          t.t_age    ,
+            t.t_id,
+            t.t_name,
+            t.t_gender,
+            t.t_age,
 
-          s.s_id     ,
-          s.s_name   ,
-          s.s_gender ,
-          s.s_age,
-          s.class_id,
+            s.s_id,
+            s.s_name,
+            s.s_gender,
+            s.s_age,
+            s.class_id
         FROM t_course c
-          LEFT JOIN t_teacher t ON c.teacher_id = t.t_id
-          LEFT JOIN t_student_course sc ON sc.sc_c_id = c.c_id
-          LEFT JOIN t_student s ON s.s_id = sc.sc_s_id
+            LEFT JOIN t_teacher t ON c.teacher_id = t.t_id
+            LEFT JOIN t_student_course sc ON sc.sc_c_id = c.c_id
+            LEFT JOIN t_student s ON s.s_id = sc.sc_s_id
         WHERE c.c_id = #{courseId};
+    </select>
+
+    <!--获取总记录数-->
+    <select id="getCourseCount" resultType="int">
+        SELECT count(*) AS total
+        FROM t_course;
     </select>
 </mapper>

@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * 班级和学生一对多
  */
-@Alias("class_")
+@Alias("class")
 public class Class {
     private int classId;
     private String className;
