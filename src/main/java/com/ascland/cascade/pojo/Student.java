@@ -6,11 +6,64 @@ import java.util.List;
 
 @Alias("student")
 public class Student {
-    private int id;//     INT         NOT NULL AUTO_INCREMENT,
-    private String name;//   VARCHAR(20) NOT NULL,
-    private String gender;// VARCHAR(2)  NOT NULL,
-    private int age;//    int,
+    private int studentId;//     INT         NOT NULL AUTO_INCREMENT,
+    private String studentName;//   VARCHAR(20) NOT NULL,
+    private String studentGender;// VARCHAR(2)  NOT NULL,
+    private int studentAge;//    int,
+    private int classId;
     private List<Course> courses;
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "studentId=" + studentId +
+                ", studentName='" + studentName + '\'' +
+                ", studentGender='" + studentGender + '\'' +
+                ", studentAge=" + studentAge +
+                ", classId=" + classId +
+                ", courses=" + courses +
+                '}';
+    }
+
+    public int getClassId() {
+        return classId;
+    }
+
+    public void setClassId(int classId) {
+        this.classId = classId;
+    }
+
+    public int getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(int studentId) {
+        this.studentId = studentId;
+    }
+
+    public String getStudentName() {
+        return studentName;
+    }
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
+
+    public String getStudentGender() {
+        return studentGender;
+    }
+
+    public void setStudentGender(String studentGender) {
+        this.studentGender = studentGender;
+    }
+
+    public int getStudentAge() {
+        return studentAge;
+    }
+
+    public void setStudentAge(int studentAge) {
+        this.studentAge = studentAge;
+    }
 
     public List<Course> getCourses() {
         return courses;
@@ -18,37 +71,5 @@ public class Student {
 
     public void setCourses(List<Course> courses) {
         this.courses = courses;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
     }
 }

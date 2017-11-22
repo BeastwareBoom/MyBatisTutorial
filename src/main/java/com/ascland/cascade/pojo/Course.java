@@ -7,42 +7,45 @@ import java.util.List;
 @Alias("course")
 public class Course {
 
-    private int id;//c_id       INT         NOT NULL AUTO_INCREMENT,
-    private String name;//c_name     VARCHAR(20) NOT NULL,
-    private String desc;//c_desc     VARCHAR(100),
+    private int courseId;//c_id       INT         NOT NULL AUTO_INCREMENT,
+    private String courseName;//c_name     VARCHAR(20) NOT NULL,
+    private String courseDesc;//c_desc     VARCHAR(100),
     private Teacher teacher;//teacher_id INT         NOT NULL,
     private List<Student> students;//对应多个学生
 
-    public List<Student> getStudents() {
-        return students;
+    @Override
+    public String toString() {
+        return "Course{" +
+                "courseId=" + courseId +
+                ", courseName='" + courseName + '\'' +
+                ", courseDesc='" + courseDesc + '\'' +
+                ", teacher=" + teacher +
+                ", students=" + students +
+                '}';
     }
 
-    public void setStudents(List<Student> students) {
-        this.students = students;
+    public int getCourseId() {
+        return courseId;
     }
 
-    public int getId() {
-        return id;
+    public void setCourseId(int courseId) {
+        this.courseId = courseId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public String getCourseName() {
+        return courseName;
     }
 
-    public String getName() {
-        return name;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getCourseDesc() {
+        return courseDesc;
     }
 
-    public String getDesc() {
-        return desc;
-    }
-
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public void setCourseDesc(String courseDesc) {
+        this.courseDesc = courseDesc;
     }
 
     public Teacher getTeacher() {
@@ -51,5 +54,13 @@ public class Course {
 
     public void setTeacher(Teacher teacher) {
         this.teacher = teacher;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 }

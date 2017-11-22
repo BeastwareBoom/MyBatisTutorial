@@ -1,5 +1,4 @@
-CREATE DATABASE mybatis
-  CHARSET utf8;
+CREATE DATABASE mybatis DEFAULT CHARSET utf8;
 
 USE mybatis;
 

@@ -1,5 +1,8 @@
 package com.ascland.cascade.pojo;
 
+/**
+ * 保存Student和Course多对多关系的中间表
+ */
 public class StudentCourseKey {
 
     private Student student;

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ascland.cascade.mapper.ClassMapper">
+
+    <!--Student-->
+    <resultMap id="studentMap" type="student">
+        <id property="studentId" column="c_id"/>
+        <result property="studentName" column="s_name"/>
+        <result property="studentGender" column="s_gender"/>
+        <result property="studentAge" column="s_age"/>
+        <result property="classId" column="class_id"/>
+    </resultMap>
+
+    <!--
+    Class通过select元素嵌套查询
+    在这种方式中，<collection>元素的select属性被设置为classId为getStudentMap的语句，用来触发单独的SQL查询加载学生信息。
+    classId这一列值将会作为输入参数传递给getStudentMap语句。
+    -->
+    <resultMap id="classMap" type="class_">
+        <id property="classId" column="c_id"/>
+        <result property="className" column="c_name"/>
+        <collection property="students" column="c_id" ofType="student" select="getStudentMap"/>
+    </resultMap>
+
+    <select id="getClassMap" resultMap="classMap" parameterType="int">
+        SELECT * FROM t_class WHERE c_id = #{classId};
+    </select>
+
+    <!--嵌套查询-->
+    <select id="getStudentMap" resultMap="studentMap" parameterType="int">
+        SELECT * FROM t_student WHERE class_id=#{classId};
+    </select>
+
+    <!--Class直接在collection标签中定义-->
+    <resultMap id="classStudentMap" type="class_">
+        <id property="classId" column="c_id"/>
+        <result property="className" column="c_name"/>
+        <!--一对多关联查询Student，不使用懒加载lazy-->
+        <collection property="students" javaType="ArrayList" ofType="student" resultMap="studentMap" fetchType="eager"/>
+    </resultMap>
+
+    <select id="getClassStudentMap" resultMap="classStudentMap" parameterType="int">
+        SELECT
+          c.c_id   ,
+          c.c_name ,
+
+          s.s_id,
+          s.s_name,
+          s.s_gender,
+          s.s_age,
+          s.class_id
+        FROM t_class c
+          LEFT OUTER JOIN t_student s ON s.class_id = c.c_id
+        WHERE c.c_id = #{classId};
+
+    </select>
+</mapper>

@@ -5,6 +5,15 @@ DROP TABLE IF EXISTS t_course;
 DROP TABLE IF EXISTS t_student;
 DROP TABLE IF EXISTS t_student_course;
 
+#班级表
+CREATE TABLE t_class (
+  c_id   INT         NOT NULL AUTO_INCREMENT,
+  c_name VARCHAR(20) NOT NULL,
+  PRIMARY KEY (c_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
 # 教师表
 CREATE TABLE t_teacher (
   t_id     INT         NOT NULL AUTO_INCREMENT,
@@ -22,6 +31,7 @@ CREATE TABLE t_student (
   s_name   VARCHAR(20) NOT NULL,
   s_gender VARCHAR(2)  NOT NULL,
   s_age    INT,
+  class_id INT         NOT NULL,
   PRIMARY KEY (s_id)
 )
   ENGINE = InnoDB
@@ -59,6 +69,12 @@ CREATE TABLE t_student_course (
 #   ENGINE = InnoDB
 #   DEFAULT CHARSET = utf8;
 
+#为student表的class_id添加外键约束
+ALTER TABLE t_student
+  ADD CONSTRAINT FK_student_class_c_id FOREIGN KEY (class_id) REFERENCES t_class (c_id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT;
+
 #为course表的teacher_id添加外键约束
 ALTER TABLE t_course
   ADD CONSTRAINT FK_course_teacher_t_id FOREIGN KEY (teacher_id) REFERENCES t_teacher (t_id)
@@ -77,37 +93,86 @@ ALTER TABLE t_student_course
   ON DELETE RESTRICT
   ON UPDATE RESTRICT;
 
-INSERT INTO t_teacher(t_name, t_gender, t_age) VALUES ('陈同富', '男', 36);
-INSERT INTO t_teacher(t_name, t_gender, t_age) VALUES ('李洁', '女', 31);
-INSERT INTO t_teacher(t_name, t_gender, t_age) VALUES ('张爱华', '女', 32);
+INSERT INTO t_class (c_name) VALUES ('07级22班');
 
-INSERT INTO t_student(s_name, s_gender, s_age) VALUES ('刘宗泽', '男', 26);
-INSERT INTO t_student(s_name, s_gender, s_age) VALUES ('田军', '男', 27);
-INSERT INTO t_student(s_name, s_gender, s_age) VALUES ('崔震', '男', 26);
-INSERT INTO t_student(s_name, s_gender, s_age) VALUES ('邢亚男', '女', 26);
-INSERT INTO t_student(s_name, s_gender, s_age) VALUES ('张虎', '男', 26);
 
-INSERT INTO t_course(c_name, c_desc, teacher_id) VALUES ('数学', '理科最重要的学科',1);
-INSERT INTO t_course(c_name, c_desc, teacher_id) VALUES ('英语', '我最喜欢的学科',2);
-INSERT INTO t_course(c_name, c_desc, teacher_id) VALUES ('语文', '很重要的学科',3);
+INSERT INTO t_teacher (t_name, t_gender, t_age) VALUES ('陈同富', '男', 36);
+INSERT INTO t_teacher (t_name, t_gender, t_age) VALUES ('李洁', '女', 31);
+INSERT INTO t_teacher (t_name, t_gender, t_age) VALUES ('张爱华', '女', 32);
 
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (1,1);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (1,2);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (1,3);
+INSERT INTO t_student (s_name, s_gender, s_age, class_id) VALUES ('刘宗泽', '男', 26, 1);
+INSERT INTO t_student (s_name, s_gender, s_age, class_id) VALUES ('田军', '男', 27, 1);
+INSERT INTO t_student (s_name, s_gender, s_age, class_id) VALUES ('崔震', '男', 26, 1);
+INSERT INTO t_student (s_name, s_gender, s_age, class_id) VALUES ('邢亚男', '女', 26, 1);
+INSERT INTO t_student (s_name, s_gender, s_age, class_id) VALUES ('张虎', '男', 26, 1);
 
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (2,1);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (2,2);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (2,3);
+INSERT INTO t_course (c_name, c_desc, teacher_id) VALUES ('数学', '理科最重要的学科', 1);
+INSERT INTO t_course (c_name, c_desc, teacher_id) VALUES ('英语', '我最喜欢的学科', 2);
+INSERT INTO t_course (c_name, c_desc, teacher_id) VALUES ('语文', '很重要的学科', 3);
 
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (3,1);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (3,2);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (3,3);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (1, 1);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (1, 2);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (1, 3);
 
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (4,1);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (4,2);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (4,3);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (2, 1);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (2, 2);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (2, 3);
 
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (5,1);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (5,2);
-INSERT INTO t_student_course(sc_s_id, sc_c_id) VALUES (5,3);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (3, 1);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (3, 2);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (3, 3);
 
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (4, 1);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (4, 2);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (4, 3);
+
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 1);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 2);
+INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 3);
+
+# 查询班级对应学生
+SELECT
+  c.c_id   AS classId,
+  c.c_name AS className,
+
+  s.s_id,
+  s.s_name,
+  s.s_gender,
+  s.s_age
+FROM t_class c
+  LEFT JOIN t_student s ON s.class_id = c.c_id
+WHERE c_id = 1;
+
+# 查询课程对应老师，不带 t.t_id as teacherId，否则解析失败
+SELECT
+  c.c_id   AS courseId,
+  c.c_name AS courseName,
+  c.c_desc AS courseDesc,
+  t.t_id,
+  t.t_name,
+  t.t_gender,
+  t.t_age
+FROM t_course c LEFT JOIN t_teacher t ON c.teacher_id = t.t_id
+WHERE c.c_id = 1;
+
+# 查询课程对应老师和学生
+SELECT
+  c.c_id   AS courseId,
+  c.c_name AS courseName,
+  c.c_desc AS courseDesc,
+
+  t.t_id,
+  t.t_name,
+  t.t_gender,
+  t.t_age,
+
+  s.s_id,
+  s.s_name,
+  s.s_gender,
+  s.s_age,
+  s.class_id
+FROM t_course c
+  LEFT JOIN t_teacher t ON c.teacher_id = t.t_id
+  LEFT JOIN t_student_course sc ON sc.sc_c_id = c.c_id
+  LEFT JOIN t_student s ON s.s_id = sc.sc_s_id
+WHERE c.c_id = 1;

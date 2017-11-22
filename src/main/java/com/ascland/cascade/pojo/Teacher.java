@@ -4,40 +4,50 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("teacher")
 public class Teacher {
-    private int id;//     INT         NOT NULL AUTO_INCREMENT,
-    private String name;//   VARCHAR(20) NOT NULL,
-    private String gender;// VARCHAR(2)  NOT NULL,
-    private int age;//    int,
+    private int teacherId;//     INT         NOT NULL AUTO_INCREMENT,
+    private String teacherName;//   VARCHAR(20) NOT NULL,
+    private String teacherGender;// VARCHAR(2)  NOT NULL,
+    private int teacherAge;//    int,
 
-    public int getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "teacherId=" + teacherId +
+                ", teacherName='" + teacherName + '\'' +
+                ", teacherGender='" + teacherGender + '\'' +
+                ", teacherAge=" + teacherAge +
+                '}';
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getTeacherId() {
+        return teacherId;
     }
 
-    public String getName() {
-        return name;
+    public void setTeacherId(int teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public String getGender() {
-        return gender;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender;
+    public String getTeacherGender() {
+        return teacherGender;
     }
 
-    public int getAge() {
-        return age;
+    public void setTeacherGender(String teacherGender) {
+        this.teacherGender = teacherGender;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public int getTeacherAge() {
+        return teacherAge;
+    }
+
+    public void setTeacherAge(int teacherAge) {
+        this.teacherAge = teacherAge;
     }
 }

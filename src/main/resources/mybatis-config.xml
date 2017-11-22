@@ -11,6 +11,8 @@
         <setting name="cacheEnabled" value="true"/>
         <!--延迟加载的全局开关-->
         <setting name="lazyLoadingEnabled" value="false"/>
+        <!--<setting name="aggressiveLazyLoading" value="true"/>-->
+
         <!--设置超时时间-->
         <setting name="defaultStatementTimeout" value="3000"/>
         <!--本地缓存机制-->
@@ -29,6 +31,7 @@
         <!--当POJO比较多时，可以使用package包扫描形式配置，并添加类的注解@Alias("role")，
         对于不添加注解的，MyBatis也会自动扫描生成别名，将类的首字母小写作为别名-->
         <package name="com.ascland.chapter02"/>
+        <package name="com.ascland.cascade.pojo"/>
     </typeAliases>
 
     <environments default="dev">
@@ -48,6 +51,8 @@
     <mappers>
         <mapper resource="com/ascland/chapter02/RoleMapper.xml"/>
         <mapper resource="com/ascland/chapter02/UserMapper.xml"/>
+        <mapper resource="com/ascland/cascade/mapper/CourseMapper.xml"/>
+        <mapper resource="com/ascland/cascade/mapper/ClassMapper.xml"/>
 
         <!--批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载
         遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；
