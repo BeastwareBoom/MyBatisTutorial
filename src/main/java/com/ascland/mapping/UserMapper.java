@@ -5,5 +5,5 @@ package com.ascland.mapping;
  */
 public interface UserMapper {
 
-    int insertUser(User user);
+    User getUserRole(long userId);
 }

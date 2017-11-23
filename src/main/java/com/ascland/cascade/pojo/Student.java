@@ -13,6 +13,7 @@ public class Student {
     private int classId;
     private List<Course> courses;
 
+
     @Override
     public String toString() {
         return "Student{" +

@@ -25,10 +25,12 @@
         role_id, role_name, role_memo
     </sql>
 
+    <!--使用${attribute}做占位符-->
     <sql id="AliasColumns">
-        #{prefix}.role_id, #{prefix}.role_name, #{prefix}.role_memo
+        ${prefix}.role_id, ${prefix}.role_name, ${prefix}.role_memo
     </sql>
 
+    <!--引用并赋值给prefix属性-->
     <select id="getAllRoles" resultType="role">
         select
         <include refid="AliasColumns">

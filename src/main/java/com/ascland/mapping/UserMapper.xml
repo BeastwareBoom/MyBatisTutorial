@@ -2,45 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.ascland.mapping.UserMapper">
 
-    <!--定义resultMap-->
+    <!--定义userMap
+    column 	从数据库中得到的列名,或者是列名的重命名标签。
+    这也是通常和会传递给 resultSet.getString(columnName)方法参数中相同的字符串。
+    -->
     <resultMap id="userMap" type="com.ascland.mapping.User">
-        <id property="id" column="id"/>
-        <result property="userName" column="user_name"/>
-        <result property="userRoleId" column="user_role_id"/>
+        <id property="id" column="userId"/>
+        <result property="name" column="userName"/>
+        <result property="roleId" column="userRoleId"/>
     </resultMap>
 
     <!--user表和role表联合查询
     left join是以A表的记录为基础的,A可以看成左表,B可以看成右表,left join是以左表为准的.
 换句话说,左表(A)的记录将会全部表示出来,而右表(B)只会显示符合搜索条件的记录(例子中为: A.aID = B.bID).
 B表记录不足的地方均为NULL-->
-    <select id="getUserLeftJoinRole" parameterType="long" resultMap="userMap">
+
+    <select id="getUserRole" parameterType="long" resultMap="userMap">
         SELECT
-            u.id,
+            u.user_id AS userId2,
             u.user_name    AS userName,
             u.user_role_id AS userRoleId,
-            r.id,
-            r.role_name    AS roleName,
-            r.note
+            r.role_id,
+            r.role_name   ,
+            r.role_memo
         FROM t_user u
-            LEFT JOIN t_role r ON u.user_role_id = r.id
-        WHERE u.id = #{id}
+            LEFT JOIN t_role r ON u.user_role_id = r.role_id
+        WHERE u.user_id = #{id}
     </select>
 
-    <!--user表和role表联合查询-->
-    <select id="getUserInnerJoinRole" parameterType="long" resultMap="userMap">
-        SELECT
-            u.id,
-            u.user_name    AS userName,
-            u.user_role_id AS userRoleId,
-            r.id,
-            r.role_name    AS roleName,
-            r.note
-        FROM t_user u
-            LEFT JOIN t_role r ON u.user_role_id = r.id
-        WHERE u.id = #{id}
-    </select>
 
-    <insert id="insertUser" parameterType="user">
-        INSERT INTO t_user (user_name, user_role_id) VALUES (#{userName}, #{userRoleId})
-    </insert>
 </mapper>

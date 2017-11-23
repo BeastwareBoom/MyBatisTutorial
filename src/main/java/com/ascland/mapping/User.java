@@ -1,40 +1,40 @@
 package com.ascland.mapping;
 
 public class User {
-    private Long userId;
-    private String userName;
-    private Long userRoleId;
+    private Long id;
+    private String name;
+    private Long roleId;
 
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + userId +
-                ", userName='" + userName + '\'' +
-                ", userRoleId=" + userRoleId +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", roleId=" + roleId +
                 '}';
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getName() {
+        return name;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getUserRoleId() {
-        return userRoleId;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setUserRoleId(Long userRoleId) {
-        this.userRoleId = userRoleId;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }

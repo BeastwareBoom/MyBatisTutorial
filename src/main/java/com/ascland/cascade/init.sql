@@ -48,6 +48,38 @@ CREATE TABLE t_course (
   ENGINE = InnoDB
   DEFAULT CHARSET = utf8;
 
+# 男学生健康表
+CREATE TABLE t_male_health (
+  mh_id      INT         NOT NULL AUTO_INCREMENT,
+  mh_qlx     VARCHAR(20) NOT NULL,
+  student_id INT         NOT NULL,
+  PRIMARY KEY (mh_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+# 女学生健康表
+CREATE TABLE t_female_health (
+  fh_id      INT         NOT NULL AUTO_INCREMENT,
+  fh_zg      VARCHAR(20) NOT NULL,
+  student_id INT         NOT NULL,
+  PRIMARY KEY (fh_id)
+)
+  ENGINE = InnoDB
+  DEFAULT CHARSET = utf8;
+
+#为male_health表的student_id添加外键约束
+ALTER TABLE t_male_health
+  ADD CONSTRAINT FK_mh_student_s_id FOREIGN KEY (student_id) REFERENCES t_student (s_id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT;
+
+#为male_health表的student_id添加外键约束
+ALTER TABLE t_female_health
+  ADD CONSTRAINT FK_fh_student_s_id FOREIGN KEY (student_id) REFERENCES t_student (s_id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT;
+
 # 学生课程关系表
 CREATE TABLE t_student_course (
   sc_s_id INT NOT NULL,
@@ -129,6 +161,14 @@ INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (4, 3);
 INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 1);
 INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 2);
 INSERT INTO t_student_course (sc_s_id, sc_c_id) VALUES (5, 3);
+
+# 插入健康状况
+INSERT INTO t_male_health (mh_qlx, student_id) VALUES ('健康', 1);
+INSERT INTO t_male_health (mh_qlx, student_id) VALUES ('健康', 2);
+INSERT INTO t_male_health (mh_qlx, student_id) VALUES ('健康', 3);
+INSERT INTO t_male_health (mh_qlx, student_id) VALUES ('健康', 5);
+
+INSERT INTO t_female_health (fh_zg, student_id) VALUES ('良好', 4);
 
 # 查询班级对应学生
 SELECT

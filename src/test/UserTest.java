@@ -2,6 +2,8 @@ import com.ascland.mapping.SqlSessionFactoryUtil;
 import com.ascland.mapping.User;
 import com.ascland.mapping.UserMapper;
 import org.apache.ibatis.session.SqlSession;
+import org.apache.log4j.BasicConfigurator;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
@@ -9,17 +11,21 @@ import org.junit.Test;
  */
 public class UserTest {
 
+    @BeforeClass
+    public static void init() {
+        //初始化log4j配置
+        BasicConfigurator.configure();
+    }
+
+
     @Test
-    public void testInsertRole() {
+    public void testGetUserRole() {
         SqlSession sqlSession = null;
         try {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             UserMapper mapper = sqlSession.getMapper(UserMapper.class);
-            User user = new User();
-            user.setUserName("刘宗泽");
-            user.setUserRoleId(10007L);
-            int column = mapper.insertUser(user);
-            System.out.println("column = " + column);
+            User userRole = mapper.getUserRole(1L);
+            System.out.println(userRole);
             sqlSession.commit();
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.ascland.cascade.mapper.StudentMapper">
+
+    <!--学生Map-->
+    <resultMap id="studentMap" type="student">
+        <id property="studentId" column="s_id"/>
+        <result property="studentName" column="s_name"/>
+        <result property="studentAge" column="s_age"/>
+        <result property="studentGender" column="s_gender"/>
+        <result property="classId" column="class_id"/>
+        <!--鉴别器-->
+        <discriminator javaType="string" column="s_gender">
+            <case value="男" resultMap="maleStudentMap"/>
+            <!--<case value="女" resultMap="femaleStudentMap"/>-->
+
+            <!--两种定义形式-->
+            <case value="女" resultType="femaleStudent">
+                <association property="femaleHealth" column="s_id" select="getFemaleHealth"/>
+            </case>
+        </discriminator>
+    </resultMap>
+
+    <select id="getStudentById" parameterType="int" resultMap="studentMap">
+        SELECT
+        s.s_id,
+        s.s_name,
+        s.s_gender,
+        s.s_age,
+        s.class_id
+        FROM t_student s WHERE s.s_id = #{studentId};
+    </select>
+
+    <!--男学生Map-->
+    <resultMap id="maleStudentMap" type="maleStudent" extends="studentMap">
+        <!--传入学生id：s_id-->
+        <association property="maleHealth" column="s_id" select="getMaleHealth"/>
+    </resultMap>
+
+    <!--女学生Map-->
+    <resultMap id="femaleStudentMap" type="femaleStudent" extends="studentMap">
+        <association property="femaleHealth" column="s_id" select="getFemaleHealth"/>
+    </resultMap>
+
+    <!--获取男学生健康Select-->
+    <select id="getMaleHealth" resultMap="maleHealthMap" parameterType="int">
+        SELECT * FROM t_male_health WHERE student_id = #{id};
+    </select>
+
+    <!--获取女学生健康Select-->
+    <select id="getFemaleHealth" resultMap="femaleHealthMap" parameterType="int">
+        SELECT * FROM t_female_health WHERE student_id = #{id};
+    </select>
+
+    <!--男学生健康Map-->
+    <resultMap id="maleHealthMap" type="maleHealth">
+        <id column="mh_id" property="id"/>
+        <result column="mh_qlx" property="qlx"/>
+        <result column="student_id" property="studentId"/>
+    </resultMap>
+
+    <!--女学生健康Map-->
+    <resultMap id="femaleHealthMap" type="femaleHealth">
+        <id column="fh_id" property="id"/>
+        <result column="fh_zg" property="zg"/>
+        <result column="student_id" property="studentId"/>
+    </resultMap>
+</mapper>

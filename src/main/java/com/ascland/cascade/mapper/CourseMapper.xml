@@ -10,7 +10,7 @@
         <result property="teacherAge" column="t_age"/>
     </resultMap>
 
-    <!--定义courseMap-->
+    <!--定义courseMap，column属性-->
     <resultMap id="courseMap" type="course">
         <id property="courseId" column="c_id"/>
         <result property="courseName" column="c_name"/>

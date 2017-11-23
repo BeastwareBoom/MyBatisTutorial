@@ -11,7 +11,8 @@
         <setting name="cacheEnabled" value="true"/>
         <!--延迟加载的全局开关-->
         <setting name="lazyLoadingEnabled" value="true"/>
-        <setting name="aggressiveLazyLoading" value="true"/>
+        <!--是否延迟加载-->
+        <setting name="aggressiveLazyLoading" value="false"/>
 
         <!--设置超时时间-->
         <setting name="defaultStatementTimeout" value="3000"/>
@@ -56,6 +57,7 @@
         <mapper resource="com/ascland/mapping/UserMapper.xml"/>
         <mapper resource="com/ascland/cascade/mapper/CourseMapper.xml"/>
         <mapper resource="com/ascland/cascade/mapper/ClassMapper.xml"/>
+        <mapper resource="com/ascland/cascade/mapper/StudentMapper.xml"/>
 
         <!--批量加载映射配置文件,mybatis自动扫描包下面的mapper接口进行加载
         遵循一定的规范：需要将mapper接口类名和mapper.xml映射文件名称保持一致，且在一个目录中；

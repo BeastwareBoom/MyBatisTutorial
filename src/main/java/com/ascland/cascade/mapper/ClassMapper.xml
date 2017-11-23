@@ -6,9 +6,10 @@
     <resultMap id="studentMap" type="student">
         <id property="studentId" column="s_id"/>
         <result property="studentName" column="s_name"/>
-        <result property="studentGender" column="s_gender"/>
         <result property="studentAge" column="s_age"/>
         <result property="classId" column="class_id"/>
+        <!--鉴别器-->
+        <result property="studentGender" column="s_gender"/>
     </resultMap>
 
     <!--
@@ -40,19 +41,20 @@
         <id property="classId" column="c_id"/>
         <result property="className" column="c_name"/>
         <!--一对多关联查询Student，不使用懒加载lazy-->
-        <collection property="students" javaType="ArrayList" ofType="student" resultMap="studentMap" fetchType="lazy"/>
+        <collection property="students" javaType="ArrayList" ofType="student" resultMap="studentMap"
+                    columnPrefix="pre_" fetchType="lazy"/>
     </resultMap>
 
     <select id="getClassStudentMap" resultMap="classStudentMap" parameterType="int">
         SELECT
-            c.c_id,
+            c.c_id ,
             c.c_name,
 
-            s.s_id,
-            s.s_name,
-            s.s_gender,
-            s.s_age,
-            s.class_id
+            s.s_id AS pre_s_id,
+            s.s_name AS pre_s_name,
+            s.s_gender AS pre_s_gender,
+            s.s_age AS pre_s_age,
+            s.class_id AS pre_class_id
         FROM t_class c
             LEFT OUTER JOIN t_student s ON s.class_id = c.c_id
         WHERE c.c_id = #{classId};
