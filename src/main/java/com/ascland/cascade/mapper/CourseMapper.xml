@@ -25,7 +25,7 @@
         </association>-->
 
         <!--【方式一】使用resultType关联  resultMap="teacherMap"-->
-        <association property="teacher" column="teacher_id"  resultMap="teacherMap"/>
+        <association property="teacher" column="teacher_id"  resultMap="teacherMap" fetchType="lazy"/>
     </resultMap>
 
     <resultMap id="courseStudentMap" type="course" extends="courseMap">

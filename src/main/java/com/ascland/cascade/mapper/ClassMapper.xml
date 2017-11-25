@@ -20,10 +20,13 @@
     <resultMap id="classMap" type="class">
         <id property="classId" column="c_id"/>
         <result property="className" column="c_name"/>
-        <collection property="students" column="c_id" ofType="student" select="getStudentMap" fetchType="lazy"/>
+        <!--fetchType="lazy"-->
+        <collection property="students" column="c_id" ofType="student" select="getStudentMap"/>
     </resultMap>
 
-    <select id="getClassStudentMap2" resultMap="classMap" parameterType="int">
+    <!--测试懒加载，在association和collection中，使用select元素关联查询时，fetchType属性会起作用-->
+    <!--useCache="true"-->
+    <select id="getClassStudentMap2" resultMap="classMap" parameterType="int" useCache="false">
         SELECT *
         FROM t_class
         WHERE c_id = #{classId};
@@ -60,4 +63,10 @@
         WHERE c.c_id = #{classId};
 
     </select>
+
+    <!--<cache/>标签可以完成开启缓存
+    <cache eviction="LRU"
+           flushInterval="3000"
+           size="1024"
+           readOnly="true"/>-->
 </mapper>

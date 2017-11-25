@@ -17,7 +17,6 @@ public class UserTest {
         BasicConfigurator.configure();
     }
 
-
     @Test
     public void testGetUserRole() {
         SqlSession sqlSession = null;

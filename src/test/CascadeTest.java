@@ -52,6 +52,9 @@ public class CascadeTest {
         }
     }
 
+    /**
+     * 测试懒加载
+     */
     @Test
     public void testGetClass() {
         SqlSession sqlSession = null;
@@ -59,7 +62,8 @@ public class CascadeTest {
             sqlSession = SqlSessionFactoryUtil.openSqlSession();
             ClassMapper mapper = sqlSession.getMapper(ClassMapper.class);
 //            Class classStudentMap = mapper.getClassStudentMap(1);
-            Class classStudentMap = mapper.getClassStudentMap2(1);
+            Class classStudentMap = mapper.getClassStudentMap2(3);
+            Class classStudentMap2 = mapper.getClassStudentMap2(3);
 //            System.out.println(classStudentMap);
             sqlSession.commit();
         } catch (Exception e) {

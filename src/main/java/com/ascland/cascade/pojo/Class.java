@@ -3,13 +3,14 @@ package com.ascland.cascade.pojo;
 import com.ascland.cascade.pojo.Student;
 import org.apache.ibatis.type.Alias;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
  * 班级和学生一对多
  */
 @Alias("class")
-public class Class {
+public class Class implements Serializable{
     private int classId;
     private String className;
     private List<Student> students;

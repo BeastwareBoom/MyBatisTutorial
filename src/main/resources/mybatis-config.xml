@@ -7,17 +7,18 @@
 
     <!--设置选项-->
     <settings>
-        <!-- 开启mybatis缓存设置,一般都是true -->
+        <!--缓存设置，默认true-->
         <setting name="cacheEnabled" value="true"/>
+        <!--缓存机制，默认SESSION，可选STATEMENT-->
+        <setting name="localCacheScope" value="SESSION"/>
+
         <!--延迟加载的全局开关-->
         <setting name="lazyLoadingEnabled" value="true"/>
-        <!--是否延迟加载-->
+        <!--是否延迟加载，默认true，全部加载-->
         <setting name="aggressiveLazyLoading" value="false"/>
 
         <!--设置超时时间-->
         <setting name="defaultStatementTimeout" value="3000"/>
-        <!--本地缓存机制-->
-        <setting name="localCacheScope" value="STATEMENT"/>
         <setting name="defaultExecutorType" value="SIMPLE"/>
         <!--自动将下划线字段解析为驼峰命名的属性-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
