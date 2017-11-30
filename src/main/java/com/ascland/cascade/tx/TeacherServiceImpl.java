@@ -2,6 +2,7 @@ package com.ascland.cascade.tx;
 
 import com.ascland.cascade.mapper.TTeacherMapper;
 import com.ascland.cascade.pojo.TTeacher;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -9,11 +10,12 @@ import javax.annotation.Resource;
 
 //除ArithmeticException之外的异常均会回滚
 @Transactional(rollbackFor = Throwable.class
-        , noRollbackFor = ArithmeticException.class)
+        /*, noRollbackFor = ArithmeticException.class*/)
 @Service("service")
 public class TeacherServiceImpl implements TeacherService {
 
-    @Resource
+    //    @Resource
+    @Autowired
     private TTeacherMapper mapper;
 
     public int deleteByPrimaryKey(Integer tId) {
